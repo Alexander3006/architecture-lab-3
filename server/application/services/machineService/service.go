@@ -38,11 +38,7 @@ func (ms MachineService) GetMachine(id int) (*entities.Machine, error) {
 	machine := entities.Machine{
 		Id: id,
 	}
-	res, err := ms.machineRepository.Read(machine)
-	if err != nil {
-		return nil, err
-	}
-	return res, nil
+	return ms.machineRepository.Read(machine)
 }
 
 func (ms MachineService) AddComponent(machineId, diskId int) error {

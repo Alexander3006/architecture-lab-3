@@ -9,33 +9,32 @@ go run .\cmd\server
 
 ```
 Machine {
-    id: int
+	id: int
 	name: string
-    cpuCount: int
-    totalDiskSpace: int
+	cpuCount: int
+	totalDiskSpace: int
 }
 
 Disk {
 	id: int
-    space: int
+	space: int
 }
 ```
 
 #### ♦ Get machine by id:
 
-
 ```
 request: {
 	url: "/api/machine"
-    query: "?id="
+	query: "?id="
 	method: "GET"
 }
 response : {
 	200: {
     	body: Machine
-    }
-    400: "bad request"
-    404: "not found"
+    	}
+    	400: "bad request"
+    	404: "not found"
 }
 ```
 
@@ -44,13 +43,13 @@ response : {
 ```
 request: {
 	url: "/api/machine/all"
-    method: "GET"
+    	method: "GET"
 }
 response {
 	200: {
     	body: []Machine
-    }
-    500: "server error"
+    	}
+    	500: "server error"
 }
 ```
 
@@ -59,15 +58,15 @@ response {
 ```
 request: {
 	url: "/api/machine/create"
-    method: "POST"
-    body: {
-    	name: int
-        cpuCount: int
+   	method: "POST"
+    	body: {
+    		name: int
+        	cpuCount: int
     }
 }
 response: {
 	200
-    409: "machine cannot be created"
+    	409: "machine cannot be created"
 }
 ```
 
@@ -76,15 +75,15 @@ response: {
 ```
 request: {
 	url: "/api/machine/addDisk"
-    method: "POST",
-    body: {
-    	machineId: int
-        diskId: int
+    	method: "POST",
+    	body: {
+    		machineId: int
+        	diskId: int
     }
 }
 response: {
 	200
-    409: "disk cannot be added"
+    	409: "disk cannot be added"
 }
 ```
 
@@ -93,14 +92,14 @@ response: {
 ```
 request: {
 	url: "/api/machine/delete"
-    method: "DELETE"
-    body: {
-    	id: int
+    	method: "DELETE"
+    	body: {
+    		id: int
     }
 }
 response: {
 	200
-    409: "machine cannot be deleted"
+    	409: "machine cannot be deleted"
 }
 ```
 
@@ -109,15 +108,15 @@ response: {
 ```
 request: {
 	url: "/api/machine/removeDisk"
-    method: "DELETE"
-    body: {
-    	machineId: int
-        diskId: int
+    	method: "DELETE"
+    	body: {
+    		machineId: int
+        	diskId: int
     }
 }
 response: {
 	200
-    409: "component cannot be removed"
+    	409: "component cannot be removed"
 }
 ```
 
@@ -126,11 +125,11 @@ response: {
 ```
 request: {
 	url: "/api/disk/all"
-    method: "GET"
+    	method: "GET"
 }
 response: {
 	200: []disk
-    500: "server error"
+    	500: "server error"
 }
 ```
 
@@ -139,14 +138,14 @@ response: {
 ```
 request: {
 	url: "/api/disk/create"
-    method: "POST"
-    body: {
-    	space: int
+    	method: "POST"
+    	body: {
+    		space: int
     }
 }
 response: {
 	200
-    409: "disk cannot be created"
+    	409: "disk cannot be created"
 }
 ```
 
@@ -155,13 +154,13 @@ response: {
 ```
 request: {
 	url: "/api/disk/delete"
-    method: "DELETE"
-    body: {
-    	id: int
-    }
+    	method: "DELETE"
+    	body: {
+    		id: int
+    	}
 }
 response: {
 	200
-    409: "disk cannot be deleted"
+    	409: "disk cannot be deleted"
 }
 ```

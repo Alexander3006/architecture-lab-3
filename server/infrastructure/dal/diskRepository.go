@@ -33,11 +33,11 @@ func (dr *DiskRepository) GetAll() ([]*entities.Disk, error) {
 	defer rows.Close()
 	var res []*entities.Disk
 	for rows.Next() {
-		var disk *entities.Disk
-		if err := rows.Scan(disk.Id, disk.Space); err != nil {
+		var disk entities.Disk
+		if err := rows.Scan(&disk.Id, &disk.Space); err != nil {
 			return nil, err
 		}
-		res = append(res, disk)
+		res = append(res, &disk)
 	}
 	if res == nil {
 		res = make([]*entities.Disk, 0)

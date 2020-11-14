@@ -7,6 +7,7 @@ type IConnection interface {
 	SendError(int, string)
 	Ok(interface{})
 	NotFound(string)
+	GetBody(interface{}) error
 }
 
 

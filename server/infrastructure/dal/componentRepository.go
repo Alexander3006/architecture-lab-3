@@ -20,7 +20,7 @@ func (cp *ComponentRepository) Create(c entities.Component) error {
 
 func (cp *ComponentRepository) Delete(c entities.Component) error {
 	_, err := cp.Db.Exec(
-		`DELETE  from "MachineComponents" WHERE "machineId" = $1 AND "diskId = $2"`,
+		`DELETE  from "MachineComponents" WHERE "machineId" = $1 AND "diskId" = $2`,
 		c.MachineId,
 		c.DiskId,
 	)

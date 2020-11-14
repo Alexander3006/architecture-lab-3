@@ -37,4 +37,10 @@ func (c Connection) Ok(res interface{}) {
 	c.writeJson(http.StatusOK, res)
 }
 
-
+func (c Connection) GetBody(buffer interface{}) error {
+	err := json.NewDecoder(c.request.Body).Decode(buffer)
+	if err != nil {
+		c.SendError(400, "bad Json payload")
+	}
+	return err
+}

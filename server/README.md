@@ -31,7 +31,7 @@ request: {
 }
 response : {
 	200: {
-    	body: Machine
+    		body: Machine
     	}
     	400: "bad request"
     	404: "not found"
@@ -47,7 +47,7 @@ request: {
 }
 response {
 	200: {
-    	body: []Machine
+    		body: []Machine
     	}
     	500: "server error"
 }

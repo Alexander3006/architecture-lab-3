@@ -62,7 +62,7 @@ request: {
     	body: {
     		name: int
         	cpuCount: int
-    }
+    	}
 }
 response: {
 	200
@@ -79,7 +79,7 @@ request: {
     	body: {
     		machineId: int
         	diskId: int
-    }
+    	}
 }
 response: {
 	200
@@ -95,7 +95,7 @@ request: {
     	method: "DELETE"
     	body: {
     		id: int
-    }
+    	}
 }
 response: {
 	200
@@ -112,7 +112,7 @@ request: {
     	body: {
     		machineId: int
         	diskId: int
-    }
+    	}
 }
 response: {
 	200
@@ -141,7 +141,7 @@ request: {
     	method: "POST"
     	body: {
     		space: int
-    }
+    	}
 }
 response: {
 	200

@@ -5,9 +5,10 @@ import (
 	"github.com/google/wire"
 )
 
-func NewHttpServer(router interfaces.IRouter) *HttpServer {
+func NewHttpServer(router interfaces.IRouter, port interfaces.HttpPortNumber) *HttpServer {
 	httpServer := &HttpServer{
 		router: router,
+		port:   port,
 	}
 	return httpServer
 }

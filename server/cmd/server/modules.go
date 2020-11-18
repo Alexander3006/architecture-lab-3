@@ -20,12 +20,15 @@ func ComposeServices() (*controllers.Controllers, error) {
 		diskService.Provider,
 		machineService.Provider,
 		controllers.Providers,
-		))
+		GetConfig,
+	))
 }
 
-func ComposeHttpServer() *transport.HttpServer {
+func ComposeHttpServer() (*transport.HttpServer, error) {
 	panic(wire.Build(
 		router.Provider,
 		transport.Providers,
-		))
+		GetConfig,
+		GetPort,
+	))
 }

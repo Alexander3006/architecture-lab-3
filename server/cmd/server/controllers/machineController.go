@@ -69,7 +69,7 @@ func (c Controllers) addDisk(connection interfaces.IConnection) {
 	err := c.machineService.AddDisk(*disk.MachineId, disk.Id)
 	if err != nil {
 		log.Printf("Error adding component to machine: %s", err)
-		connection.SendError(409, err.Error())
+		connection.SendError(409, "component cannot be added")
 		return
 	}
 }

@@ -156,7 +156,7 @@ request: {
 	url: "/api/disk/delete"
     	method: "DELETE"
     	body: {
-    		id: int
+    		diskId: int
     	}
 }
 response: {

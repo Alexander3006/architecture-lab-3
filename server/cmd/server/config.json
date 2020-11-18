@@ -1,0 +1,12 @@
+{
+  "db": {
+    "name": "al3",
+		"user": "al3",
+		"host": "localhost",
+		"password": "al3",
+		"disableSSL": true
+  },
+  "server": {
+    "port": 3000
+  }
+}

@@ -2,31 +2,37 @@ package main
 
 import (
 	"database/sql"
-	"github.com/Alexander3006/architecture-lab-3/server/infrastructure/db"
 	"os"
 	"os/signal"
+
+	"github.com/Alexander3006/architecture-lab-3/server/infrastructure/db"
 )
 
-func NewDbConnection() (*sql.DB, error) {
+func NewDbConnection(conf *Config) (*sql.DB, error) {
 	conn := &db.Connection{
-		DbName: "lb3",
-		User: "postgres",
-		Host: "localhost",
-		Password: "30062001",
-		DisableSSL: true,
+		DbName:     conf.Db.Name,
+		User:       conf.Db.User,
+		Host:       conf.Db.Host,
+		Password:   conf.Db.Password,
+		DisableSSL: conf.Db.DisableSSL,
 	}
 	return conn.Open()
 }
 
-func main() {
-	services, err := ComposeServices()
+func handle(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func main() {
+	services, err := ComposeServices()
+	handle(err)
 	services.Register()
 
-	server := ComposeHttpServer()
-	go server.Start(3000)
+	server, err := ComposeHttpServer()
+	handle(err)
+	go server.Start()
 
 	sigChannel := make(chan os.Signal, 1)
 	signal.Notify(sigChannel, os.Interrupt)

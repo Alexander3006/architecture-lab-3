@@ -61,31 +61,30 @@ func (c Controllers) getAllMachines(connection interfaces.IConnection) {
 
 //Post
 func (c Controllers) addDisk(connection interfaces.IConnection) {
-	var component entities.Component
-	if err := connection.GetBody(&component); err != nil {
+	var disk entities.Disk
+	if err := connection.GetBody(&disk); err != nil {
 		log.Printf("Error decoding component %s: ", err)
 		return
 	}
-	err := c.machineService.AddComponent(component.MachineId, component.DiskId)
+	err := c.machineService.AddDisk(*disk.MachineId, disk.Id)
 	if err != nil {
 		log.Printf("Error adding component to machine: %s", err)
-		connection.SendError(409, "component cannot be added")
+		connection.SendError(409, err.Error())
 		return
 	}
 }
 
 //Delete
 func (c Controllers) removeDisk(connection interfaces.IConnection) {
-	var component entities.Component
-	if err := connection.GetBody(&component); err != nil {
+	var disk entities.Disk
+	if err := connection.GetBody(&disk); err != nil {
 		log.Printf("Error decoding component: %s", err)
 		return
 	}
-	err := c.machineService.RemoveComponent(component.MachineId, component.DiskId)
+	err := c.machineService.RemoveDisk(*disk.MachineId, disk.Id)
 	if err != nil {
 		log.Printf("Error removing component to machine: %s", err)
 		connection.SendError(409, "component cannot be removed")
 		return
 	}
-
 }

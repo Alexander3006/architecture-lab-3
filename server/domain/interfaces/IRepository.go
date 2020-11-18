@@ -9,13 +9,10 @@ type IMachineRepository interface {
 	GetAll() ([]*entities.Machine, error)
 }
 
-type IComponentRepository interface {
-	Create(entities.Component) error
-	Delete(entities.Component) error
-}
-
 type IDiskRepository interface {
+	Update(entities.Disk) error
 	Create(entities.Disk) error
 	Delete(entities.Disk) error
 	GetAll() ([]*entities.Disk, error)
+	Get(entities.Disk) (*entities.Disk, error)
 }

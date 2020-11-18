@@ -23,9 +23,8 @@ func ComposeServices() (*controllers.Controllers, error) {
 		return nil, err
 	}
 	machineRepository := dal.NewMachineRepository(db)
-	componentRepository := dal.NewComponentRepository(db)
-	machineServiceMachineService := machineService.NewMachineService(machineRepository, componentRepository)
 	diskRepository := dal.NewDiskRepository(db)
+	machineServiceMachineService := machineService.NewMachineService(machineRepository, diskRepository)
 	diskServiceDiskService := diskService.NewDiskService(diskRepository)
 	controllersControllers := controllers.NewControllers(routerRouter, machineServiceMachineService, diskServiceDiskService)
 	return controllersControllers, nil

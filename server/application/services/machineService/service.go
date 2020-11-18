@@ -8,7 +8,7 @@ import (
 
 type MachineService struct {
 	machineRepository interfaces.IMachineRepository
-	componentRepository interfaces.IComponentRepository
+	diskRepository interfaces.IDiskRepository
 }
 
 func (ms MachineService) CreateMachine(name string, cpuCount int) error {
@@ -41,22 +41,34 @@ func (ms MachineService) GetMachine(id int) (*entities.Machine, error) {
 	return ms.machineRepository.Read(machine)
 }
 
-func (ms MachineService) AddComponent(machineId, diskId int) error {
-	component := entities.Component{
-		MachineId: machineId,
-		DiskId: diskId,
+func (ms MachineService) AddDisk(machineId, diskId int) error {
+	disk, err := ms.diskRepository.Get(entities.Disk{Id: diskId})
+	if err != nil {
+		return err
 	}
-	err := ms.componentRepository.Create(component)
-	return err
+	if disk.MachineId != nil {
+		return fmt.Errorf("the disk %d is occupied by another machine", disk.Id)
+	}
+	disk.MachineId = &machineId
+	if err := ms.diskRepository.Update(*disk); err != nil {
+		return err
+	}
+	return nil
 }
 
-func (ms MachineService) RemoveComponent(machineId, diskId int) error {
-	component := entities.Component{
-		MachineId: machineId,
-		DiskId: diskId,
+func (ms MachineService) RemoveDisk(machineId, diskId int) error {
+	disk, err := ms.diskRepository.Get(entities.Disk{Id: diskId})
+	if err != nil {
+		return err
 	}
-	err := ms.componentRepository.Delete(component)
-	return err
+	if *disk.MachineId != machineId {
+		return fmt.Errorf("the machine %d has no disk %d", machineId, diskId)
+	}
+	disk.MachineId = nil
+	if err := ms.diskRepository.Update(*disk); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (ms MachineService) GetAllMachines() ([]*entities.Machine, error) {

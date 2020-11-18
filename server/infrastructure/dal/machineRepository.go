@@ -2,7 +2,6 @@ package dal
 
 import (
 	"database/sql"
-	"fmt"
 	"github.com/Alexander3006/architecture-lab-3/server/domain/entities"
 )
 
@@ -13,7 +12,7 @@ type MachineRepository struct {
 func (mr *MachineRepository) Create(m entities.Machine) error {
 
 	_, err := mr.Db.Exec(
-		"INSERT INTO \"Machines\" (name, \"cpuCount\") VALUES ($1, $2)",
+		`INSERT INTO "Machines" (name, "cpuCount") VALUES ($1, $2)`,
 		m.Name,
 		m.CpuCount,
 		)
@@ -21,12 +20,11 @@ func (mr *MachineRepository) Create(m entities.Machine) error {
 }
 
 func (mr *MachineRepository) Delete(m entities.Machine) error {
-	_,err := mr.Db.Exec(`DELETE FROM "Machines" WHERE id = $1)`, m.Id);
+	_,err := mr.Db.Exec(`DELETE FROM "Machines" WHERE id = $1`, m.Id);
 	return err
 }
 
 func (mr *MachineRepository) Read(m entities.Machine) (*entities.Machine, error) {
-	fmt.Print(m.Id)
 	rows, err := mr.Db.Query(`SELECT * FROM "MachinesInfo"() WHERE id = $1`, m.Id)
 	if err != nil {
 		return nil, err

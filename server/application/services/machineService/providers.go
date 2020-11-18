@@ -6,10 +6,10 @@ import (
 	"github.com/google/wire"
 )
 
-func NewMachineService(mr interfaces.IMachineRepository, cp interfaces.IComponentRepository) *MachineService {
+func NewMachineService(mr interfaces.IMachineRepository, dr interfaces.IDiskRepository) *MachineService {
 	return &MachineService{
 		machineRepository: mr,
-		componentRepository: cp,
+		diskRepository: dr,
 	}
 }
 

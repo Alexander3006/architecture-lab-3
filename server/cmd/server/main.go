@@ -9,7 +9,7 @@ import (
 
 func NewDbConnection() (*sql.DB, error) {
 	conn := &db.Connection{
-		DbName: "al3",
+		DbName: "lb3",
 		User: "postgres",
 		Host: "localhost",
 		Password: "30062001",

@@ -7,6 +7,6 @@ type IMachineService interface {
 	DeleteMachine(int) error
 	GetMachine(int) (*entities.Machine, error)
 	GetAllMachines() ([]*entities.Machine, error)
-	AddComponent(int, int) error
-	RemoveComponent(int, int) error
+	AddDisk(int, int) error
+	RemoveDisk(int, int) error
 }

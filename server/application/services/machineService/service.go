@@ -69,7 +69,7 @@ func (ms MachineService) RemoveDisk(machineId, diskId int) error {
 	  return err
 	}
 	return nil
- }
+}
 
 func (ms MachineService) GetAllMachines() ([]*entities.Machine, error) {
 	return ms.machineRepository.GetAll()

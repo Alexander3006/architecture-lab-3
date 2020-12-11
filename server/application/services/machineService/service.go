@@ -59,17 +59,17 @@ func (ms MachineService) AddDisk(machineId, diskId int) error {
 func (ms MachineService) RemoveDisk(machineId, diskId int) error {
 	disk, err := ms.diskRepository.Get(entities.Disk{Id: diskId})
 	if err != nil {
-		return err
+	  return err
 	}
-	if *disk.MachineId != machineId {
-		return fmt.Errorf("the machine %d has no disk %d", machineId, diskId)
+	if disk.MachineId != nil && *disk.MachineId != machineId {
+	  return fmt.Errorf("the machine %d has no disk %d", machineId, diskId)
 	}
 	disk.MachineId = nil
 	if err := ms.diskRepository.Update(*disk); err != nil {
-		return err
+	  return err
 	}
 	return nil
-}
+  }
 
 func (ms MachineService) GetAllMachines() ([]*entities.Machine, error) {
 	return ms.machineRepository.GetAll()

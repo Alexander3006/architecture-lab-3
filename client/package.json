@@ -1,0 +1,11 @@
+{
+  "name": "machines",
+  "version": "1.0.0",
+  "description": "",
+  "main": "examples.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
